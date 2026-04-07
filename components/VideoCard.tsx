@@ -1,0 +1,54 @@
+"use client";
+
+import React from 'react';
+import { Play, List } from 'lucide-react';
+
+interface VideoCardProps {
+  id: string;
+  thumbnail: string;
+  title: string;
+  author: string;
+  views: string;
+  duration: string;
+  date: string;
+}
+
+const VideoCard: React.FC<VideoCardProps> = ({ id, thumbnail, title, author, views, duration, date }) => {
+  return (
+    <div className="group cursor-pointer">
+      {/* Thumbnail */}
+      <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-200">
+        <img 
+          src={thumbnail} 
+          alt={title} 
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+          <div className="flex items-center text-white text-[10px] space-x-2">
+            <span className="flex items-center"><Play size={10} className="mr-1" /> {views}</span>
+            <span className="flex items-center"><List size={10} className="mr-1" /> 评论</span>
+          </div>
+        </div>
+        {/* Duration */}
+        <div className="absolute bottom-1 right-1 px-1 py-0.5 bg-black/60 text-white text-[10px] rounded">
+          {duration}
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className="mt-2">
+        <h3 className="text-sm font-medium line-clamp-2 text-gray-900 group-hover:text-brand-pink transition-colors">
+          {title}
+        </h3>
+        <div className="mt-1 flex items-center text-xs text-gray-500 space-x-1">
+          <span className="hover:text-brand-pink">{author}</span>
+          <span>•</span>
+          <span>{date}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default VideoCard;
